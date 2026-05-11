@@ -1,0 +1,269 @@
+---
+import type { ResultadoGeneral } from '../data/talleres';
+import Icon from './Icon.astro';
+
+interface Props {
+  resultados: ResultadoGeneral[];
+}
+
+const { resultados } = Astro.props;
+---
+
+<section class="resultados-section" id="resultados">
+  <div class="section-header">
+    <div class="section-badge resultados-badge"><Icon name="target" size={13} /> Logros</div>
+    <h2>Resultados del Proyecto</h2>
+    <p>Lo que logramos construir juntos en la Vereda Indazurí, Santander</p>
+  </div>
+
+  <div class="resultados-grid">
+    {resultados.map((resultado, i) => (
+      <div class="resultado-card" style={`animation-delay: ${i * 0.1}s`}>
+        <div class="resultado-icon"><Icon name={resultado.icon} size={24} /></div>
+        <div class="resultado-content">
+          <h3>{resultado.titulo}</h3>
+          <p>{resultado.descripcion}</p>
+        </div>
+        <div class="resultado-check"><Icon name="check" size={14} /></div>
+      </div>
+    ))}
+  </div>
+
+  <div class="impacto-banner">
+    <div class="impacto-left">
+      <div class="impacto-icon"><Icon name="chat" size={32} /></div>
+      <div>
+        <h3>Impacto Comunitario</h3>
+        <p>
+          Los participantes manifestaron interés en aplicar los aprendizajes en su vida cotidiana
+          y compartirlos con otras personas de la comunidad, generando un <strong>efecto multiplicador</strong> del
+          conocimiento adquirido. La seguridad digital ya no es un concepto lejano: es una herramienta
+          de todos los días para las familias de la vereda.
+        </p>
+      </div>
+    </div>
+    <div class="impacto-stats">
+      <div class="mini-stat">
+        <span class="mini-stat-num">100%</span>
+        <span class="mini-stat-label">Participación activa</span>
+      </div>
+      <div class="mini-stat">
+        <span class="mini-stat-num">6</span>
+        <span class="mini-stat-label">Talleres completados</span>
+      </div>
+      <div class="mini-stat">
+        <span class="mini-stat-num">∞</span>
+        <span class="mini-stat-label">Conocimiento compartido</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .resultados-section {
+    margin-bottom: 64px;
+    scroll-margin-top: 80px;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .section-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .resultados-badge {
+    background: #f0fdf4;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+  }
+
+  .section-header h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 12px;
+  }
+
+  .section-header p {
+    color: #6b7280;
+    font-size: 15px;
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .resultados-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+
+  .resultado-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    animation: slideIn 0.5s ease both;
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .resultado-card:hover {
+    border-color: #10b981;
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.1);
+    transform: translateX(6px);
+  }
+
+  .resultado-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    background: #f0fdf4;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #10b981;
+  }
+
+  .resultado-content {
+    flex: 1;
+  }
+
+  .resultado-content h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+
+  .resultado-content p {
+    font-size: 13px;
+    color: #6b7280;
+    line-height: 1.4;
+  }
+
+  .resultado-check {
+    width: 28px;
+    height: 28px;
+    background: #10b981;
+    color: white;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* Impacto Banner */
+  .impacto-banner {
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+    border-radius: 20px;
+    padding: 36px 40px;
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .impacto-left {
+    display: flex;
+    gap: 20px;
+    flex: 1;
+    min-width: 280px;
+  }
+
+  .impacto-icon {
+    flex-shrink: 0;
+    color: #a78bfa;
+    filter: drop-shadow(0 0 12px rgba(139, 92, 246, 0.5));
+  }
+
+  .impacto-left h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 12px;
+  }
+
+  .impacto-left p {
+    color: rgba(255,255,255,0.65);
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .impacto-left strong {
+    color: #a78bfa;
+  }
+
+  .impacto-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 180px;
+  }
+
+  .mini-stat {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .mini-stat-num {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #a78bfa;
+    line-height: 1;
+  }
+
+  .mini-stat-label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    font-weight: 500;
+  }
+
+  @media (max-width: 768px) {
+    .impacto-banner {
+      padding: 24px;
+      flex-direction: column;
+    }
+
+    .impacto-stats {
+      flex-direction: row;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+
+    .mini-stat {
+      flex: 1;
+      min-width: 120px;
+      text-align: center;
+    }
+  }
+</style>

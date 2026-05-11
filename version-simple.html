@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comunidad Conectada y Segura - Colombia</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #2d5016 0%, #4a7c2c 100%);
+      color: white;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .header .subtitle {
+      font-size: 1.2rem;
+      opacity: 0.95;
+      margin-bottom: 5px;
+    }
+
+    .header .location {
+      font-size: 1rem;
+      opacity: 0.85;
+    }
+
+    /* Filtro de zona */
+    .filter-section {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .filter-section label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #333;
+      font-size: 1.1rem;
+    }
+
+    .filter-section select {
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      border: 2px solid #4CAF50;
+      border-radius: 8px;
+      background: white;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .filter-section select:focus {
+      outline: none;
+      border-color: #2d5016;
+      box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+    }
+
+    /* Contactos de emergencia */
+    .emergency-section {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      margin-bottom: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .emergency-section h2 {
+      color: #d32f2f;
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .emergency-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+    }
+
+    .emergency-card {
+      background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+      color: white;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
+
+    .emergency-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    .emergency-card .icon {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .emergency-card .title {
+      font-weight: bold;
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+
+    .emergency-card .number {
+      font-size: 1.8rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    /* Temáticas */
+    .topics-section {
+      margin-bottom: 30px;
+    }
+
+    .topics-section h2 {
+      color: white;
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 2rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .topics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .topic-card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      transition: all 0.3s;
+      cursor: pointer;
+      border-left: 5px solid;
+    }
+
+    .topic-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+    }
+
+    .topic-card .icon {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .topic-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+      color: #333;
+    }
+
+    .topic-card p {
+      color: #666;
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    /* Footer */
+    .footer {
+      background: rgba(255,255,255,0.95);
+      padding: 25px;
+      border-radius: 15px;
+      text-align: center;
+      margin-top: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .footer h3 {
+      color: #4a7c2c;
+      margin-bottom: 10px;
+    }
+
+    .footer p {
+      color: #666;
+      line-height: 1.8;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 1.8rem;
+      }
+
+      .header .subtitle {
+        font-size: 1rem;
+      }
+
+      .topics-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .emergency-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Animación de entrada */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .topic-card, .emergency-card {
+      animation: fadeInUp 0.6s ease-out;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <h1>🌄 Comunidad Conectada y Segura</h1>
+      <p class="subtitle">Información de seguridad digital para comunidades rurales</p>
+      <p class="location">📍 Colombia - Zonas Rurales</p>
+    </header>
+
+    <!-- Filtro de zona -->
+    <section class="filter-section">
+      <label for="zona-select">🗺️ Selecciona tu zona:</label>
+      <select id="zona-select">
+        <option value="0">Santander - Vereda Indazurí</option>
+        <option value="1">Cundinamarca - Zonas Rurales</option>
+        <option value="2">Antioquia - Zonas Rurales</option>
+        <option value="3">Cauca - Zonas Rurales</option>
+        <option value="4">Boyacá - Zonas Rurales</option>
+        <option value="5">Tolima - Zonas Rurales</option>
+        <option value="6">Zonas Rurales - General</option>
+      </select>
+    </section>
+
+    <!-- Contactos de emergencia -->
+    <section class="emergency-section" id="emergency-info">
+      <h2>🚨 Contactos de Emergencia Cercanos</h2>
+      <div class="emergency-grid">
+        <div class="emergency-card" onclick="llamar('policia')">
+          <div class="icon">👮</div>
+          <div class="title">Policía Nacional</div>
+          <div class="number" id="policia-number">123</div>
+        </div>
+        <div class="emergency-card" onclick="llamar('bomberos')">
+          <div class="icon">🚒</div>
+          <div class="title">Bomberos</div>
+          <div class="number" id="bomberos-number">119</div>
+        </div>
+        <div class="emergency-card" onclick="llamar('defensoria')">
+          <div class="icon">⚖️</div>
+          <div class="title">Defensoría del Pueblo</div>
+          <div class="number" id="defensoria-number">018000 914 814</div>
+        </div>
+        <div class="emergency-card" onclick="llamar('fiscalia')">
+          <div class="icon">🏛️</div>
+          <div class="title">Fiscalía</div>
+          <div class="number" id="fiscalia-number">122</div>
+        </div>
+        <div class="emergency-card" onclick="llamar('salud')">
+          <div class="icon">🏥</div>
+          <div class="title">Centro de Salud</div>
+          <div class="number" id="salud-number">192</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Temáticas -->
+    <section class="topics-section">
+      <h2>📚 Temáticas de Seguridad Digital</h2>
+      <div class="topics-grid">
+        <div class="topic-card" style="border-left-color: #4CAF50" onclick="mostrarInfo(1)">
+          <span class="icon">🌐</span>
+          <h3>Acceso a internet en zonas rurales</h3>
+          <p>Cómo conectarse de forma segura y aprovechar los recursos digitales</p>
+        </div>
+        <div class="topic-card" style="border-left-color: #5C6BC0" onclick="mostrarInfo(2)">
+          <span class="icon">⚠️</span>
+          <h3>No creer en noticias falsas ni engaños</h3>
+          <p>Identificar información falsa y protegerse de estafas en línea</p>
+        </div>
+        <div class="topic-card" style="border-left-color: #26A69A" onclick="mostrarInfo(3)">
+          <span class="icon">🔒</span>
+          <h3>Cuidar la información personal en internet</h3>
+          <p>Proteger datos personales y privacidad en redes sociales</p>
+        </div>
+        <div class="topic-card" style="border-left-color: #42A5F5" onclick="mostrarInfo(4)">
+          <span class="icon">👨‍👩‍👧‍👦</span>
+          <h3>Proteger a los niños en redes sociales</h3>
+          <p>Supervisión y cuidado de menores en el mundo digital</p>
+        </div>
+        <div class="topic-card" style="border-left-color: #EF5350" onclick="mostrarInfo(5)">
+          <span class="icon">🚨</span>
+          <h3>Denunciar el acoso y engaño en línea</h3>
+          <p>Cómo reportar situaciones de ciberacoso y fraude digital</p>
+        </div>
+        <div class="topic-card" style="border-left-color: #AB47BC" onclick="mostrarInfo(6)">
+          <span class="icon">📱</span>
+          <h3>Usar el celular sin que afecte la salud</h3>
+          <p>Uso responsable de dispositivos móviles y bienestar digital</p>
+        </div>
+        <div class="topic-card" style="border-left-color: #FF9800" onclick="mostrarInfo(7)">
+          <span class="icon">👴</span>
+          <h3>Talleres para adultos mayores en tecnología</h3>
+          <p>Capacitación digital para personas de la tercera edad</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <h3>🤝 Participantes del Encuentro Veredal</h3>
+      <p>
+        <strong>Vereda Indazurí - Santander - Mayo 2026</strong><br>
+        Líderes comunitarios • Madres • Jóvenes • Docentes
+      </p>
+      <p style="margin-top: 15px; font-size: 0.9rem;">
+        💡 Esta plataforma fue creada para fortalecer la seguridad digital<br>
+        en comunidades rurales de Colombia
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    // Datos de zonas
+    const zonasEmergencia = [
+      {
+        zona: "Santander - Vereda Indazurí",
+        policia: "123",
+        bomberos: "119",
+        defensoria: "018000 914 814",
+        fiscalia: "122",
+        salud: "Puesto de Salud Indazurí"
+      },
+      {
+        zona: "Cundinamarca - Zonas Rurales",
+        policia: "123",
+        bomberos: "119",
+        defensoria: "018000 914 814",
+        fiscalia: "122",
+        salud: "Hospital Local - 192"
+      },
+      {
+        zona: "Antioquia - Zonas Rurales",
+        policia: "123",
+        bomberos: "119",
+        defensoria: "018000 914 814",
+        fiscalia: "122",
+        salud: "Centro de Salud - 192"
+      },
+      {
+        zona: "Cauca - Zonas Rurales",
+        policia: "123",
+        bomberos: "119",
+        defensoria: "018000 914 814",
+        fiscalia: "122",
+        salud: "Puesto de Salud - 192"
+      },
+      {
+        zona: "Boyacá - Zonas Rurales",
+        policia: "123",
+        bomberos: "119",
+        defensoria: "018000 914 814",
+        fiscalia: "122",
+        salud: "Centro de Salud - 192"
+      },
+      {
+        zona: "Tolima - Zonas Rurales",
+        policia: "123",
+        bomberos: "119",
+        defensoria: "018000 914 814",
+        fiscalia: "122",
+        salud: "Puesto de Salud - 192"
+      },
+      {
+        zona: "Zonas Rurales - General",
+        policia: "123",
+        bomberos: "119",
+        defensoria: "018000 914 814",
+        fiscalia: "122",
+        salud: "Línea 192 - Emergencias"
+      }
+    ];
+
+    // Actualizar información de emergencia
+    const zonaSelect = document.getElementById('zona-select');
+    
+    function actualizarEmergencia() {
+      const index = zonaSelect.value;
+      const zona = zonasEmergencia[index];
+      
+      document.getElementById('policia-number').textContent = zona.policia;
+      document.getElementById('bomberos-number').textContent = zona.bomberos;
+      document.getElementById('defensoria-number').textContent = zona.defensoria;
+      document.getElementById('fiscalia-number').textContent = zona.fiscalia;
+      document.getElementById('salud-number').textContent = zona.salud;
+    }
+    
+    zonaSelect.addEventListener('change', actualizarEmergencia);
+    actualizarEmergencia();
+
+    // Función para llamar
+    function llamar(tipo) {
+      const numeros = {
+        policia: document.getElementById('policia-number').textContent,
+        bomberos: document.getElementById('bomberos-number').textContent,
+        defensoria: document.getElementById('defensoria-number').textContent,
+        fiscalia: document.getElementById('fiscalia-number').textContent,
+        salud: document.getElementById('salud-number').textContent
+      };
+
+      const titulos = {
+        policia: 'Policía Nacional',
+        bomberos: 'Bomberos',
+        defensoria: 'Defensoría del Pueblo',
+        fiscalia: 'Fiscalía',
+        salud: 'Centro de Salud'
+      };
+
+      if (confirm(`¿Deseas llamar a ${titulos[tipo]}?\nNúmero: ${numeros[tipo]}`)) {
+        window.location.href = `tel:${numeros[tipo]}`;
+      }
+    }
+
+    // Función para mostrar información de temáticas
+    function mostrarInfo(id) {
+      const mensajes = {
+        1: "🌐 Acceso a internet en zonas rurales\n\n• Busca puntos de acceso comunitario\n• Usa contraseñas seguras en WiFi público\n• Aprovecha programas gubernamentales de conectividad\n• Aprende a usar datos móviles eficientemente",
+        2: "⚠️ No creer en noticias falsas\n\n• Verifica la fuente de la información\n• Desconfía de noticias sensacionalistas\n• Consulta fuentes oficiales\n• No compartas sin verificar\n• Pregunta a personas de confianza",
+        3: "🔒 Cuidar información personal\n\n• No compartas contraseñas\n• Usa contraseñas diferentes para cada cuenta\n• No publiques datos personales (dirección, teléfono)\n• Configura privacidad en redes sociales\n• Ten cuidado con lo que compartes",
+        4: "👨‍👩‍👧‍👦 Proteger a los niños\n\n• Supervisa el uso de internet\n• Habla con ellos sobre riesgos en línea\n• Configura controles parentales\n• Conoce sus amigos virtuales\n• Establece horarios de uso",
+        5: "🚨 Denunciar acoso y engaño\n\n• Guarda evidencias (capturas de pantalla)\n• Reporta en la plataforma donde ocurrió\n• Llama a la Policía (123) o Fiscalía (122)\n• No respondas a amenazas\n• Busca apoyo de adultos de confianza",
+        6: "📱 Uso saludable del celular\n\n• Toma descansos cada hora\n• No uses el celular antes de dormir\n• Mantén distancia de la pantalla\n• Haz ejercicios para los ojos\n• Balancea tiempo digital y actividades físicas",
+        7: "👴 Talleres para adultos mayores\n\n• Aprende a tu propio ritmo\n• No tengas miedo de preguntar\n• Practica regularmente\n• Pide ayuda a familiares\n• Participa en talleres comunitarios"
+      };
+
+      alert(mensajes[id] + "\n\n¡Participa en los talleres comunitarios para aprender más!");
+    }
+  </script>
+</body>
+</html>

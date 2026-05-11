@@ -1,0 +1,256 @@
+---
+import Icon from './Icon.astro';
+---
+<footer class="site-footer">
+  <div class="footer-top">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-logo"><Icon name="shield" size={40} /></div>
+          <h3>Comunidad Conectada y Segura</h3>
+          <p>
+            Plataforma de seguridad digital creada para fortalecer las competencias
+            tecnológicas de comunidades rurales de Colombia.
+          </p>
+          <div class="footer-tags">
+            <span class="ftag">Colombia</span>
+            <span class="ftag">Rural</span>
+            <span class="ftag">Digital</span>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Temáticas</h4>
+          <ul>
+            <li><a href="#taller-1"><Icon name="globe" size={13} /> Redes sociales y algoritmos</a></li>
+            <li><a href="#taller-2"><Icon name="lock" size={13} /> Privacidad y datos personales</a></li>
+            <li><a href="#taller-3"><Icon name="alert" size={13} /> Ciberacoso y fraude</a></li>
+            <li><a href="#taller-4"><Icon name="news" size={13} /> Fake news</a></li>
+            <li><a href="#taller-5"><Icon name="heart" size={13} /> Salud mental digital</a></li>
+            <li><a href="#taller-6"><Icon name="users" size={13} /> Guía comunitaria</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Recursos Clave</h4>
+          <ul>
+            <li><a href="https://colombiacheck.com" target="_blank" rel="noopener">Colombiacheck</a></li>
+            <li><a href="https://www.teprotejo.org" target="_blank" rel="noopener">Te Protejo Colombia</a></li>
+            <li><a href="https://caivirtual.policia.gov.co" target="_blank" rel="noopener">CAIV Virtual - Policía</a></li>
+            <li><a href="https://www.mintic.gov.co" target="_blank" rel="noopener">MinTIC Colombia</a></li>
+            <li><a href="https://www.unad.edu.co" target="_blank" rel="noopener">UNAD Colombia</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Emergencias</h4>
+          <div class="emergency-quick">
+            <a href="tel:123" class="eq-btn"><Icon name="police" size={14} /> Policía: 123</a>
+            <a href="tel:141" class="eq-btn"><Icon name="baby" size={14} /> ICBF: 141</a>
+            <a href="tel:122" class="eq-btn"><Icon name="scales" size={14} /> Fiscalía: 122</a>
+            <a href="tel:192" class="eq-btn"><Icon name="hospital" size={14} /> Salud: 192</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="bottom-content">
+        <p>
+          <Icon name="users" size={16} /> <strong>Vereda Indazurí, Santander · Mayo 2026</strong><br>
+          Líderes comunitarios · Madres · Jóvenes · Docentes
+        </p>
+        <p class="unad-credit">
+          Proyecto desarrollado como <strong>Servicio Unadista</strong> · 
+          <a href="https://www.unad.edu.co" target="_blank" rel="noopener">UNAD Colombia</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: #0f172a;
+    color: rgba(255,255,255,0.7);
+    margin-top: 80px;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .footer-top {
+    padding: 60px 0 40px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+  }
+
+  .footer-brand {
+    color: rgba(255,255,255,0.65);
+  }
+
+  .brand-logo {
+    color: #a78bfa;
+    margin-bottom: 16px;
+    filter: drop-shadow(0 0 12px rgba(139, 92, 246, 0.4));
+  }
+
+  .footer-brand h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  .footer-brand p {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 20px;
+  }
+
+  .footer-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .ftag {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.6);
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  /* Footer columns */
+  .footer-col h4 {
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 16px;
+  }
+
+  .footer-col ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .footer-col a {
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    font-size: 13.5px;
+    transition: all 0.2s;
+    display: block;
+  }
+
+  .footer-col a:hover {
+    color: #a78bfa;
+    padding-left: 4px;
+  }
+
+  /* Emergency quick links */
+  .emergency-quick {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .eq-btn {
+    display: block;
+    background: rgba(220, 38, 38, 0.1);
+    border: 1px solid rgba(220, 38, 38, 0.2);
+    color: #fca5a5 !important;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .eq-btn:hover {
+    background: rgba(220, 38, 38, 0.2) !important;
+    border-color: rgba(220, 38, 38, 0.4) !important;
+    padding-left: 18px !important;
+    color: #fca5a5 !important;
+  }
+
+  /* Footer bottom */
+  .footer-bottom {
+    padding: 24px 0;
+  }
+
+  .bottom-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .bottom-content p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.6;
+  }
+
+  .bottom-content strong {
+    color: rgba(255,255,255,0.7);
+  }
+
+  .unad-credit {
+    font-size: 13px !important;
+    color: rgba(255,255,255,0.35) !important;
+  }
+
+  .unad-credit a {
+    color: #a78bfa;
+    text-decoration: none;
+  }
+
+  .unad-credit a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 1024px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .footer-top {
+      padding: 40px 0 32px;
+    }
+
+    .bottom-content {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>

@@ -1,0 +1,706 @@
+---
+import type { Taller } from '../data/talleres';
+import Icon from './Icon.astro';
+
+interface Props {
+  taller: Taller;
+}
+
+const { taller } = Astro.props;
+---
+
+<article class="taller-card" id={`taller-${taller.id}`} data-color={taller.color}>
+  <!-- Card Header -->
+  <div class="card-header" style={`background: linear-gradient(135deg, ${taller.color}15, ${taller.color}05); border-left: 4px solid ${taller.color}`}>
+    <div class="card-header-inner">
+      <div class="taller-num-badge" style={`background: ${taller.color}20; color: ${taller.color}; border: 2px solid ${taller.color}40`}>
+        #{taller.id}
+      </div>
+      <div class="taller-icon-wrap" style={`background: ${taller.color}18; color: ${taller.color}`}>
+        <Icon name={taller.icon} size={28} />
+      </div>
+      <div class="taller-meta">
+        <h2 class="taller-titulo">{taller.titulo}</h2>
+        {taller.nota && (
+          <span class="nota-badge">
+            <Icon name="warning" size={14} /> {taller.nota}
+          </span>
+        )}
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs" role="tablist">
+      <button class="tab active" data-tab="queEs" onclick="switchTab(this, 'queEs')" style={`--active-color: ${taller.color}`}>
+        <Icon name="bulb" size={14} /> Qué es
+      </button>
+      <button class="tab" data-tab="comoFunciona" onclick="switchTab(this, 'comoFunciona')" style={`--active-color: ${taller.color}`}>
+        <Icon name="settings" size={14} /> Cómo funciona
+      </button>
+      <button class="tab" data-tab="queTener" onclick="switchTab(this, 'queTener')" style={`--active-color: ${taller.color}`}>
+        <Icon name="target" size={14} /> Qué tener en cuenta
+      </button>
+      <button class="tab" data-tab="queHacer" onclick="switchTab(this, 'queHacer')" style={`--active-color: ${taller.color}`}>
+        <Icon name="check" size={14} /> Qué puedes hacer
+      </button>
+      <button class="tab" data-tab="comoHacerlo" onclick="switchTab(this, 'comoHacerlo')" style={`--active-color: ${taller.color}`}>
+        <Icon name="clipboard" size={14} /> Cómo hacerlo
+      </button>
+      {taller.video && (
+        <button class="tab tab-video" data-tab="video" onclick="switchTab(this, 'video')" style={`--active-color: ${taller.color}`}>
+          <Icon name="play" size={14} /> Video
+        </button>
+      )}
+    </div>
+  </div>
+
+  <!-- Card Body -->
+  <div class="card-body">
+    <!-- Tab: Qué es? -->
+    <div class="tab-panel active" id={`panel-queEs-${taller.id}`} data-panel="queEs">
+      <div class="info-block">
+        <div class="info-icon" style={`background: ${taller.color}15; color: ${taller.color}`}>
+          <Icon name="bulb" size={22} />
+        </div>
+        <div class="info-content">
+          <h3>¿Qué es {taller.titulo}?</h3>
+          <p>{taller.queEs}</p>
+        </div>
+      </div>
+      <div class="aprendizaje-box" style={`border-left: 4px solid ${taller.color}; background: ${taller.color}08`}>
+        <strong style={`color: ${taller.color}`}><Icon name="graduation" size={14} /> Lo más importante:</strong>
+        <p>{taller.aprendizaje}</p>
+      </div>
+    </div>
+
+    <!-- Tab: Cómo funciona? -->
+    <div class="tab-panel" id={`panel-comoFunciona-${taller.id}`} data-panel="comoFunciona">
+      <div class="info-block">
+        <div class="info-icon" style={`background: ${taller.color}15; color: ${taller.color}`}>
+          <Icon name="settings" size={22} />
+        </div>
+        <div class="info-content">
+          <h3>¿Cómo funciona?</h3>
+          <p>{taller.comoFunciona}</p>
+        </div>
+      </div>
+      {taller.imagen && (
+        <div class="card-image">
+          <img src={taller.imagen} alt={`Ilustración de ${taller.titulo}`} loading="lazy" />
+          <div class="image-overlay" style={`background: linear-gradient(to top, ${taller.color}80, transparent)`}></div>
+        </div>
+      )}
+    </div>
+
+    <!-- Tab: Qué tener en cuenta -->
+    <div class="tab-panel" id={`panel-queTener-${taller.id}`} data-panel="queTener">
+      <div class="alert-list-header">
+        <span class="alert-icon" style={`color: ${taller.color}`}><Icon name="target" size={20} /></span>
+        <h3>Aspectos clave a tener en cuenta</h3>
+      </div>
+      <ul class="alert-list">
+        {taller.queTenerEnCuenta.map((item, i) => (
+          <li class="alert-item">
+            <span class="alert-num" style={`background: ${taller.color}; color: white`}>{i + 1}</span>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Tab: Qué puedes hacer? -->
+    <div class="tab-panel" id={`panel-queHacer-${taller.id}`} data-panel="queHacer">
+      <div class="alert-list-header">
+        <span class="alert-icon" style={`color: ${taller.color}`}><Icon name="check" size={20} /></span>
+        <h3>Acciones que puedes tomar ahora</h3>
+      </div>
+      <ul class="action-list">
+        {taller.queHacer.map((accion) => (
+          <li class="action-item">
+            <span class="check-icon" style={`color: ${taller.color}`}><Icon name="check" size={16} /></span>
+            <span>{accion}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Tab: Video -->
+    {taller.video && (
+      <div class="tab-panel" id={`panel-video-${taller.id}`} data-panel="video">
+        <div class="video-wrap">
+          <div class="video-header">
+            <span class="video-badge" style={`background: ${taller.color}15; color: ${taller.color}; border: 1px solid ${taller.color}30`}>
+              <Icon name="video" size={13} /> Video educativo
+            </span>
+            <p class="video-hint">Mira este video para profundizar en el tema. Puedes pausarlo y volver cuando quieras.</p>
+          </div>
+          <div class="video-container">
+            <iframe
+              src={taller.video}
+              title={`Video: ${taller.titulo}`}
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+          <div class="video-footer">
+            <span style={`color: ${taller.color}`}><Icon name="info" size={16} /></span>
+            <p>Si el video no carga, revisa tu conexión a internet o ábrelo directamente en YouTube haciendo clic en el ícono de YouTube dentro del reproductor.</p>
+          </div>
+        </div>
+      </div>
+    )}
+
+    <!-- Tab: Cómo hacerlo? -->
+    <div class="tab-panel" id={`panel-comoHacerlo-${taller.id}`} data-panel="comoHacerlo">
+      <div class="alert-list-header">
+        <span class="alert-icon" style={`color: ${taller.color}`}><Icon name="clipboard" size={20} /></span>
+        <h3>Guía paso a paso</h3>
+      </div>
+      <ol class="step-list">
+        {taller.comoHacerlo.map((paso, i) => (
+          <li class="step-item">
+            <div class="step-num" style={`background: linear-gradient(135deg, ${taller.color}, ${taller.color}99)`}>{i + 1}</div>
+            <div class="step-content">{paso}</div>
+          </li>
+        ))}
+      </ol>
+
+      <!-- Recursos -->
+      {taller.recursos && taller.recursos.length > 0 && (
+        <div class="recursos-section">
+          <h4><Icon name="link" size={12} /> Recursos útiles</h4>
+          <div class="recursos-grid">
+            {taller.recursos.map((recurso) => (
+              <a
+                href={recurso.url}
+                target={recurso.tipo !== 'telefono' ? '_blank' : '_self'}
+                rel="noopener noreferrer"
+                class="recurso-link"
+                style={`border-color: ${taller.color}40; color: ${taller.color}`}
+              >
+                <Icon name={recurso.tipo === 'web' ? 'globe' : recurso.tipo === 'app' ? 'mobile' : 'phone'} size={13} />
+                {recurso.nombre}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  </div>
+</article>
+
+<script>
+  function switchTab(clickedTab: HTMLElement, panelName: string) {
+    const card = clickedTab.closest('.taller-card') as HTMLElement;
+    if (!card) return;
+
+    // Update tabs
+    card.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+    clickedTab.classList.add('active');
+
+    // Update panels
+    card.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+    const targetPanel = card.querySelector(`[data-panel="${panelName}"]`);
+    if (targetPanel) {
+      targetPanel.classList.add('active');
+    }
+  }
+
+  // Make switchTab globally accessible
+  (window as any).switchTab = switchTab;
+</script>
+
+<style>
+  .taller-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    border: 1px solid #f1f5f9;
+  }
+
+  .taller-card:hover {
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    transform: translateY(-4px);
+  }
+
+  /* Header */
+  .card-header {
+    padding: 28px 28px 0;
+  }
+
+  .card-header-inner {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .taller-num-badge {
+    font-size: 12px;
+    font-weight: 800;
+    padding: 6px 10px;
+    border-radius: 8px;
+    letter-spacing: 1px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .taller-icon-wrap {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .taller-meta {
+    flex: 1;
+  }
+
+  .taller-titulo {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #111827;
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+
+  .nota-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #fef9c3;
+    border: 1px solid #fde047;
+    color: #854d0e;
+    padding: 5px 12px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  /* Tabs */
+  .tabs {
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    padding-bottom: 1px;
+    scrollbar-width: none;
+  }
+
+  .tabs::-webkit-scrollbar { display: none; }
+
+  .tab {
+    background: none;
+    border: none;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #6b7280;
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+    border-radius: 8px 8px 0 0;
+  }
+
+  .tab:hover {
+    color: #374151;
+    background: rgba(0,0,0,0.03);
+  }
+
+  .tab.active {
+    color: var(--active-color, #3B82F6);
+    border-bottom-color: var(--active-color, #3B82F6);
+    background: rgba(0,0,0,0.03);
+  }
+
+  /* Card Body */
+  .card-body {
+    padding: 28px;
+  }
+
+  /* Tab Panels */
+  .tab-panel {
+    display: none;
+    animation: fadeIn 0.25s ease;
+  }
+
+  .tab-panel.active {
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Video tab highlight */
+  .tab-video {
+    position: relative;
+  }
+
+  .tab-video::after {
+    content: '';
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 6px;
+    height: 6px;
+    background: #ef4444;
+    border-radius: 50%;
+    animation: blink 2s ease-in-out infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* Video panel */
+  .video-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .video-header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .video-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    width: fit-content;
+  }
+
+  .video-hint {
+    color: #6b7280;
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+
+  .video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #0f172a;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  }
+
+  .video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 14px;
+  }
+
+  .video-footer {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 12px 16px;
+    color: #6b7280;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .video-footer span {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    margin-top: 1px;
+  }
+
+  /* Info Block */
+  .info-block {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    align-items: flex-start;
+  }
+
+  .info-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .info-content h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 8px;
+  }
+
+  .info-content p {
+    color: #4b5563;
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* Aprendizaje Box */
+  .aprendizaje-box {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-top: 16px;
+  }
+
+  .aprendizaje-box strong {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    letter-spacing: 0.3px;
+  }
+
+  .aprendizaje-box p {
+    color: #374151;
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Image */
+  .card-image {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 20px;
+    height: 220px;
+  }
+
+  .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .taller-card:hover .card-image img {
+    transform: scale(1.05);
+  }
+
+  .image-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  /* Alert List */
+  .alert-list-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .alert-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .alert-list-header h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #111827;
+  }
+
+  .alert-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .alert-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: #f8fafc;
+    padding: 14px 16px;
+    border-radius: 10px;
+    border: 1px solid #f1f5f9;
+    font-size: 14px;
+    color: #374151;
+    line-height: 1.5;
+    transition: all 0.2s;
+  }
+
+  .alert-item:hover {
+    background: #f1f5f9;
+    transform: translateX(4px);
+  }
+
+  .alert-num {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+
+  /* Action List */
+  .action-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .action-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 16px;
+    background: #f0fdf4;
+    border-radius: 10px;
+    border: 1px solid #dcfce7;
+    font-size: 14px;
+    color: #374151;
+    line-height: 1.5;
+    transition: all 0.2s;
+  }
+
+  .action-item:hover {
+    transform: translateX(4px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+
+  .check-icon {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* Step List */
+  .step-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .step-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .step-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    color: white;
+    font-size: 14px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+
+  .step-content {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 13.5px;
+    color: #374151;
+    line-height: 1.6;
+    flex: 1;
+    font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+    transition: all 0.2s;
+  }
+
+  .step-content:hover {
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+  }
+
+  /* Recursos */
+  .recursos-section {
+    border-top: 1px solid #f1f5f9;
+    padding-top: 20px;
+  }
+
+  .recursos-section h4 {
+    font-size: 13px;
+    font-weight: 700;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 12px;
+  }
+
+  .recursos-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .recurso-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+    background: white;
+  }
+
+  .recurso-link:hover {
+    background: #f8fafc;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+
+  @media (max-width: 768px) {
+    .card-header { padding: 20px 20px 0; }
+    .card-body { padding: 20px; }
+    .taller-titulo { font-size: 1.15rem; }
+  }
+</style>

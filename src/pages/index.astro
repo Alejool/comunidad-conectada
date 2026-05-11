@@ -1,0 +1,451 @@
+---
+import { talleres, contactosEmergencia, resultadosGenerales } from '../data/talleres';
+import Header from '../components/Header.astro';
+import TallerCard from '../components/TallerCard.astro';
+import EmergencySection from '../components/EmergencySection.astro';
+import ResultadosSection from '../components/ResultadosSection.astro';
+import Footer from '../components/Footer.astro';
+import Icon from '../components/Icon.astro';
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Plataforma de seguridad digital para comunidades rurales de Colombia. Talleres sobre privacidad, fake news, ciberacoso, salud digital y más. Vereda Indazurí, Santander.">
+  <meta name="keywords" content="seguridad digital, comunidades rurales, Colombia, privacidad, fake news, ciberacoso, UNAD">
+  <meta property="og:title" content="Comunidad Conectada y Segura · Colombia">
+  <meta property="og:description" content="Talleres de seguridad digital para comunidades rurales de la Vereda Indazurí, Santander.">
+  <title>Comunidad Conectada y Segura · Vereda Indazurí · UNAD 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ===== HEADER / HERO ===== -->
+  <Header />
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="main-content">
+    <div class="container">
+
+      <!-- ===== INTRO CARD ===== -->
+      <section class="intro-card">
+        <div class="intro-left">
+          <div class="intro-pill">📚 Sobre el proyecto</div>
+          <h2>¿De qué trata este proyecto?</h2>
+          <p>
+            Esta plataforma recoge el trabajo de una <strong>serie de talleres comunitarios participativos</strong> realizados en la
+            Vereda Indazurí, Santander, Colombia. Cada taller aborda una temática diferente de seguridad digital
+            adaptada al contexto rural colombiano.
+          </p>
+          <p>
+            El objetivo es que cada persona, sin importar su nivel de conocimiento tecnológico, pueda
+            <strong>entender, protegerse y enseñar</strong> a otros sobre los riesgos y oportunidades del mundo digital.
+          </p>
+        </div>
+        <div class="intro-right">
+          <div class="info-chips">
+            <div class="chip chip-blue">
+              <span><Icon name="wifi" size={20} /></span>
+              <div>
+                <strong>Acceso seguro a internet</strong>
+                <small>Para zonas rurales</small>
+              </div>
+            </div>
+            <div class="chip chip-green">
+              <span><Icon name="lock" size={20} /></span>
+              <div>
+                <strong>Protección de datos</strong>
+                <small>Privacidad personal</small>
+              </div>
+            </div>
+            <div class="chip chip-red">
+              <span><Icon name="shield" size={20} /></span>
+              <div>
+                <strong>Prevención de amenazas</strong>
+                <small>Ciberacoso y fraude</small>
+              </div>
+            </div>
+            <div class="chip chip-purple">
+              <span><Icon name="bulb" size={20} /></span>
+              <div>
+                <strong>Pensamiento crítico</strong>
+                <small>Fake news y algoritmos</small>
+              </div>
+            </div>
+            <div class="chip chip-pink">
+              <span><Icon name="heart" size={20} /></span>
+              <div>
+                <strong>Bienestar digital</strong>
+                <small>Salud mental y descanso</small>
+              </div>
+            </div>
+            <div class="chip chip-amber">
+              <span><Icon name="users" size={20} /></span>
+              <div>
+                <strong>Comunidad fuerte</strong>
+                <small>Conocimiento compartido</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== TALLERES SECTION ===== -->
+      <section class="talleres-section" id="talleres">
+        <div class="section-header">
+          <div class="section-badge talleres-badge"><Icon name="book" size={13} /> Contenido</div>
+          <h2>Talleres Realizados</h2>
+          <p>Haz clic en las pestañas de cada taller para explorar todos los aspectos de la temática</p>
+        </div>
+
+        <!-- Navigation pills for workshops -->
+        <div class="taller-nav" role="navigation" aria-label="Ir a taller">
+          {talleres.map((t) => (
+            <a href={`#taller-${t.id}`} class="taller-nav-pill" style={`--color: ${t.color}`}>
+              <span>{t.icon}</span>
+              <span class="pill-text">{t.titulo}</span>
+            </a>
+          ))}
+        </div>
+
+        <!-- Taller cards -->
+        <div class="talleres-list">
+          {talleres.map((taller) => (
+            <TallerCard taller={taller} />
+          ))}
+        </div>
+      </section>
+
+      <!-- ===== RESULTADOS ===== -->
+      <ResultadosSection resultados={resultadosGenerales} />
+
+      <!-- ===== EMERGENCIAS ===== -->
+      <EmergencySection contactos={contactosEmergencia} />
+
+    </div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <Footer />
+
+  <!-- Scroll to top button -->
+  <button id="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="Volver arriba">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+
+</body>
+</html>
+
+<style is:global>
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f8fafc;
+    color: #1f2937;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ===== MAIN ===== */
+  .main-content {
+    padding: 60px 0;
+  }
+
+  /* ===== INTRO CARD ===== */
+  .intro-card {
+    background: white;
+    border-radius: 24px;
+    border: 1px solid #e5e7eb;
+    padding: 44px;
+    margin-bottom: 64px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 48px;
+    align-items: start;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+  }
+
+  .intro-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #eff6ff;
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+
+  .intro-left h2 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 16px;
+    line-height: 1.3;
+  }
+
+  .intro-left p {
+    color: #4b5563;
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 12px;
+  }
+
+  .intro-left strong {
+    color: #1d4ed8;
+  }
+
+  /* Info chips */
+  .info-chips {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .chip {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1px solid;
+    transition: transform 0.2s;
+  }
+
+  .chip:hover { transform: translateX(6px); }
+
+  .chip > span:first-child {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+
+  .chip strong {
+    display: block;
+    font-size: 13.5px;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+
+  .chip small {
+    font-size: 12px;
+    opacity: 0.75;
+  }
+
+  .chip-blue { background: #eff6ff; border-color: #bfdbfe; color: #1e40af; }
+  .chip-green { background: #f0fdf4; border-color: #bbf7d0; color: #166534; }
+  .chip-red { background: #fef2f2; border-color: #fecaca; color: #991b1b; }
+  .chip-purple { background: #faf5ff; border-color: #e9d5ff; color: #6b21a8; }
+  .chip-pink { background: #fdf2f8; border-color: #f5d0fe; color: #86198f; }
+  .chip-amber { background: #fffbeb; border-color: #fde68a; color: #92400e; }
+
+  /* ===== TALLERES SECTION ===== */
+  .talleres-section {
+    margin-bottom: 64px;
+    scroll-margin-top: 80px;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .section-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .talleres-badge {
+    background: #eff6ff;
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
+  }
+
+  .section-header h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 12px;
+  }
+
+  .section-header p {
+    color: #6b7280;
+    font-size: 15px;
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* Navigation pills */
+  .taller-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 40px;
+  }
+
+  .taller-nav-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 100px;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #4b5563;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .taller-nav-pill:hover {
+    border-color: var(--color, #3B82F6);
+    color: var(--color, #3B82F6);
+    background: color-mix(in srgb, var(--color, #3B82F6) 8%, white);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+
+  .pill-text {
+    display: none;
+  }
+
+  @media (min-width: 900px) {
+    .pill-text { display: inline; }
+  }
+
+  /* Talleres list */
+  .talleres-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  /* ===== SCROLL TO TOP ===== */
+  #scroll-top {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    width: 48px;
+    height: 48px;
+    background: #1e1b4b;
+    color: white;
+    border: none;
+    border-radius: 14px;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: all 0.2s;
+    z-index: 50;
+    opacity: 0;
+    transform: translateY(16px);
+    pointer-events: none;
+  }
+
+  #scroll-top.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+  }
+
+  #scroll-top:hover {
+    background: #312e81;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1024px) {
+    .intro-card {
+      grid-template-columns: 1fr;
+      padding: 32px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .main-content { padding: 40px 0; }
+    .intro-card { padding: 24px; margin-bottom: 48px; }
+    .intro-left h2 { font-size: 1.3rem; }
+  }
+</style>
+
+<script>
+  // Scroll to top button visibility
+  const scrollBtn = document.getElementById('scroll-top');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) {
+      scrollBtn?.classList.add('visible');
+    } else {
+      scrollBtn?.classList.remove('visible');
+    }
+  });
+
+  // Smooth scroll offset for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const href = (this as HTMLAnchorElement).getAttribute('href');
+      if (!href || href === '#') return;
+      const target = document.querySelector(href);
+      if (target) {
+        e.preventDefault();
+        const top = (target as HTMLElement).offsetTop - 80;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Intersection Observer for animation on scroll
+  const cards = document.querySelectorAll('.taller-card, .resultado-card');
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          (entry.target as HTMLElement).style.opacity = '1';
+          (entry.target as HTMLElement).style.transform = 'translateY(0)';
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+
+  cards.forEach(card => {
+    (card as HTMLElement).style.opacity = '0';
+    (card as HTMLElement).style.transform = 'translateY(24px)';
+    (card as HTMLElement).style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(card);
+  });
+</script>

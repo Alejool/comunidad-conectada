@@ -1,0 +1,333 @@
+---
+import Icon from './Icon.astro';
+---
+<header class="site-header">
+  <div class="header-bg-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+  </div>
+  <div class="container">
+    <nav class="navbar">
+      <div class="brand">
+        <div class="brand-icon"><Icon name="shield" size={32} /></div>
+        <div class="brand-text">
+          <span class="brand-name">Comunidad Conectada</span>
+          <span class="brand-sub">y Segura</span>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="#talleres">Talleres</a>
+        <a href="#resultados">Resultados</a>
+        <a href="#emergencias">Emergencias</a>
+      </div>
+      <div class="location-badge">
+        <span class="location-dot"></span>
+        <Icon name="pin" size={14} /> Vereda Indazurí, Santander
+      </div>
+    </nav>
+
+    <div class="hero">
+      <div class="hero-badge">
+        <Icon name="star" size={14} /> Servicio Unadista · Mayo 2026
+      </div>
+      <h1 class="hero-title">
+        Seguridad Digital para<br>
+        <span class="highlight">Comunidades Rurales</span>
+      </h1>
+      <p class="hero-subtitle">
+        Serie de talleres participativos para fortalecer las competencias digitales,
+        proteger la privacidad y promover el uso responsable de la tecnología en
+        comunidades rurales de Colombia.
+      </p>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-number">6</span>
+          <span class="stat-label">Talleres</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-number">5+</span>
+          <span class="stat-label">Temáticas</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-number">∞</span>
+          <span class="stat-label">Impacto</span>
+        </div>
+      </div>
+      <div class="hero-participants">
+        <div class="participant-tags">
+          <span class="tag"><Icon name="leaf" size={14} /> Líderes comunitarios</span>
+          <span class="tag"><Icon name="users" size={14} /> Madres</span>
+          <span class="tag"><Icon name="graduation" size={14} /> Jóvenes</span>
+          <span class="tag"><Icon name="book" size={14} /> Docentes</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 40%, #312e81 100%);
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 60px;
+  }
+
+  .header-bg-shapes {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .shape {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.08;
+    background: white;
+  }
+
+  .shape-1 {
+    width: 500px;
+    height: 500px;
+    top: -200px;
+    right: -100px;
+    animation: float1 8s ease-in-out infinite;
+  }
+
+  .shape-2 {
+    width: 300px;
+    height: 300px;
+    bottom: -100px;
+    left: -50px;
+    animation: float2 10s ease-in-out infinite;
+  }
+
+  .shape-3 {
+    width: 200px;
+    height: 200px;
+    top: 50%;
+    left: 40%;
+    opacity: 0.05;
+    animation: float1 12s ease-in-out infinite reverse;
+  }
+
+  @keyframes float1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(20px, -30px) scale(1.05); }
+  }
+
+  @keyframes float2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-15px, 20px) scale(1.03); }
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Navbar */
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .brand-icon {
+    color: #a78bfa;
+    filter: drop-shadow(0 0 12px rgba(139, 92, 246, 0.6));
+    display: flex;
+    align-items: center;
+  }
+
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .brand-name {
+    color: white;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.2;
+  }
+
+  .brand-sub {
+    color: rgba(167, 139, 250, 0.9);
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 8px;
+  }
+
+  .nav-links a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+
+  .nav-links a:hover {
+    color: white;
+    background: rgba(255,255,255,0.1);
+  }
+
+  .location-badge {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.9);
+    padding: 8px 16px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .location-dot {
+    width: 8px;
+    height: 8px;
+    background: #4ade80;
+    border-radius: 50%;
+    display: inline-block;
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.8); }
+  }
+
+  /* Hero */
+  .hero {
+    padding: 60px 0 20px;
+    text-align: center;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(139, 92, 246, 0.2);
+    border: 1px solid rgba(139, 92, 246, 0.4);
+    color: #c4b5fd;
+    padding: 8px 20px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 28px;
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    color: white;
+    line-height: 1.15;
+    margin-bottom: 24px;
+    letter-spacing: -0.5px;
+  }
+
+  .highlight {
+    background: linear-gradient(135deg, #a78bfa, #60a5fa, #34d399);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.7;
+    max-width: 680px;
+    margin: 0 auto 40px;
+  }
+
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 36px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 24px 48px;
+    display: inline-flex;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 32px;
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: white;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    font-weight: 500;
+    margin-top: 4px;
+  }
+
+  .stat-divider {
+    width: 1px;
+    height: 40px;
+    background: rgba(255,255,255,0.15);
+  }
+
+  .participant-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .tag {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.8);
+    padding: 8px 16px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hero { padding: 40px 0 10px; }
+    .hero-stats { padding: 20px 24px; }
+    .stat { padding: 0 20px; }
+    .stat-number { font-size: 2rem; }
+  }
+</style>
