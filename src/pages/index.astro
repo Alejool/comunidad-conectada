@@ -119,6 +119,25 @@ import Icon from '../components/Icon.astro';
           ))}
         </div>
       </section>
++
++      <!-- ===== PRESENTATION SECTION ===== -->
++      <section class="presentation-section" id="presentacion">
++        <div class="section-header">
++          <div class="section-badge presentation-badge"><Icon name="monitor" size={13} /> Interactividad</div>
++          <h2>Presentación Interactiva</h2>
++          <p>Explora nuestra guía visual sobre el uso responsable y seguro de las redes sociales</p>
++        </div>
++        
++        <div class="gamma-container">
++          <iframe 
++            src="https://gamma.app/embed/whk9ytv3ihcmfc8" 
++            style="width: 100%; height: 100%; border: none; border-radius: 16px;" 
++            allow="fullscreen" 
++            title="Uso Responsable y Seguro de las Redes Sociales">
++          </iframe>
++        </div>
++      </section>
+
 
       <!-- ===== RESULTADOS ===== -->
       <ResultadosSection resultados={resultadosGenerales} />
@@ -350,12 +369,42 @@ import Icon from '../components/Icon.astro';
 
   /* Talleres list */
   .talleres-list {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-
-  /* ===== SCROLL TO TOP ===== */
++    display: flex;
++    flex-direction: column;
++    gap: 24px;
++  }
++
++  /* ===== PRESENTATION SECTION ===== */
++  .presentation-section {
++    margin-bottom: 64px;
++    scroll-margin-top: 80px;
++  }
++
++  .presentation-badge {
++    background: #fdf2f8;
++    color: #db2777;
++    border: 1px solid #fbcfe8;
++  }
++
++  .gamma-container {
++    width: 100%;
++    aspect-ratio: 16 / 9;
++    background: white;
++    border-radius: 20px;
++    border: 1px solid #e5e7eb;
++    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
++    overflow: hidden;
++    position: relative;
++  }
++
++  @media (max-width: 768px) {
++    .gamma-container {
++      aspect-ratio: 4 / 3;
++      min-height: 400px;
++    }
++  }
++
++  /* ===== SCROLL TO TOP ===== */
   #scroll-top {
     position: fixed;
     bottom: 32px;
